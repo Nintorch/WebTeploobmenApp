@@ -67,7 +67,7 @@ namespace WebTeploobmenApp
         public static double CalcO(Data data, double y) => Calc1mexp(data, y) / Calc1mexp(data, data.H0);
         public static double CalcT1(Data data, double y) => data.T1 + (data.T2 - data.T1) * CalcV(data, y);
         public static double CalcT2(Data data, double y) => data.T1 + (data.T2 - data.T1) * CalcO(data, y);
-        public static double CalcTDifference(Data data, double y) => CalcT1(data, y) - CalcT2(data, y);
+        public static double CalcTDifference(Data data, double y) => Math.Abs(CalcT1(data, y) - CalcT2(data, y));
 
         public static string GetFuncName(int id) => funcNames[id];
     }
