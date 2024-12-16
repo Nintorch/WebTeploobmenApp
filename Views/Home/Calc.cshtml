@@ -4,7 +4,7 @@
 }
 
 <div class="text-center">
-    Результат расчёта:<br />
+    Результаты расчёта:<br />
     <table class="table table-hover">
         <tr>
             <th>Координаты y, м</th>
@@ -25,4 +25,30 @@
             </tr>
         }
     </table>
+    <div id="chart"></div>
+    <div id="chart2"></div>
+    <script>
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                x: 'x',
+                columns: [
+                    ['x', ...@Json.Serialize(Model.PositionsY)],
+                    ['Температура окатышей, С', ...@Json.Serialize(Model.TempMaterial)],
+                    ['Температура воздуха, С', ...@Json.Serialize(Model.TempGas)],
+                ]
+            }
+        });
+
+        var chart2 = c3.generate({
+            bindto: '#chart2',
+            data: {
+                x: 'x',
+                columns: [
+                    ['x', ...@Json.Serialize(Model.PositionsY)],
+                    ['Разность температур, С', ...@Json.Serialize(Model.TempDiffs)],
+                ]
+            }
+        });
+    </script>
 </div>

@@ -64,6 +64,22 @@ namespace WebTeploobmenApp.Controllers
 
             viewModel.ResultTable = result;
 
+            int materialId = funcs.ToList().IndexOf(Formulas.CalcT1);
+            int gasId = funcs.ToList().IndexOf(Formulas.CalcT2);
+            int tempDiffsId = funcs.ToList().IndexOf(Formulas.CalcTDifference);
+            viewModel.TempMaterial = [];
+            viewModel.TempGas = [];
+            viewModel.PositionsY = [];
+            viewModel.TempDiffs = [];
+
+            for (int i = 0; i < result.GetLength(0); i++)
+            {
+                viewModel.PositionsY.Add(i / 2.0);
+                viewModel.TempMaterial.Add(result[i, materialId]);
+                viewModel.TempGas.Add(result[i, gasId]);
+                viewModel.TempDiffs.Add(result[i, tempDiffsId]);
+            }
+
             _context.Variants.Add(new Variant(viewModel) { UserId = GetUserId() });
             _context.SaveChanges();
 
